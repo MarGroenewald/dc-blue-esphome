@@ -86,7 +86,7 @@ namespace esphome
     void DcBlueComponent::setup()
     {
       instance = this;
-      Timer0_Cfg = timerBegin(0, 80, true);
+      Timer0_Cfg = timerBegin(1000000);
 
       if (data_pin_ != nullptr)
       {
@@ -102,9 +102,8 @@ namespace esphome
         trigger_pin_->digital_write(0);
       }
 
-      timerAttachInterrupt(Timer0_Cfg, &Timer0_ISR, true);
-      timerAlarmWrite(Timer0_Cfg, this->symbol_period_ / 2, true);
-      timerAlarmEnable(Timer0_Cfg);
+      timerAttachInterrupt(Timer0_Cfg, &Timer0_ISR);
+      timerAlarm(Timer0_Cfg, this->symbol_period_ / 2, true, 0);
 
       // pinMode(DEBUG_PIN, OUTPUT);
       // pinMode(TIMER_PIN, OUTPUT);
