@@ -16,7 +16,7 @@ namespace esphome
 
     hw_timer_t *Timer0_Cfg = NULL;
 
-    volatile uint32_t header = 0xFFFFFFFF;
+    volatile uint32_t header = 0x00000000;//0xFFFFFFFF;
     volatile uint32_t frame = 0;
     volatile bool waiting_for_header = true;
     volatile bool capturing_frame = false;
@@ -46,7 +46,7 @@ namespace esphome
         header = header << 1 | value;
         if (header == 0x01)
         {
-          header = 0xFFFFFFFF;
+          header = 0x00000000;//0xFFFFFFFF;
           waiting_for_header = false;
           capturing_frame = true;
           captured_bytes = 0;
