@@ -186,7 +186,7 @@ namespace esphome
         ESP_LOGD(TAG, "Magnetic lock");
         break;
       default:
-        if (frame != 0x00551316 && frame != 0x00552624) ESP_LOGW(TAG, "Unknown frame received: %08X", frame);
+        if (frame != 0x00551316) ESP_LOGW(TAG, "Unknown frame received: %08X", frame);
       }
     }
 
