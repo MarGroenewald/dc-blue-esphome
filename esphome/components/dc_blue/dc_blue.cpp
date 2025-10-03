@@ -16,7 +16,7 @@ namespace esphome
 
     hw_timer_t *Timer0_Cfg = NULL;
 
-    volatile uint32_t header = 0x00000000;//0xFFFFFFFF;
+    volatile uint32_t header = 0xFFFFFFFF;
     volatile uint32_t frame = 0;
     volatile bool waiting_for_header = true;
     volatile bool capturing_frame = false;
@@ -34,7 +34,7 @@ namespace esphome
       }
 
       // digitalWrite(DEBUG_PIN, !digitalRead(DEBUG_PIN));
-
+      ESP_LOGD(TAG, value);
       bool value = instance->data_pin_->digital_read();
       if (instance->inverted_)
       {
@@ -46,7 +46,7 @@ namespace esphome
         header = header << 1 | value;
         if (header == 0x01)
         {
-          header = 0x00000000;//0xFFFFFFFF;
+          header = 0xFFFFFFFF;
           waiting_for_header = false;
           capturing_frame = true;
           captured_bytes = 0;
@@ -186,7 +186,8 @@ namespace esphome
         ESP_LOGD(TAG, "Magnetic lock");
         break;
       default:
-        if (frame != 0x00551316) ESP_LOGW(TAG, "Unknown frame received: %08X", frame);
+        break;
+        //if (frame != 0x00551316) ESP_LOGW(TAG, "Unknown frame received: %08X", frame);
       }
     }
 
