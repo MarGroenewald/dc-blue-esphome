@@ -44,7 +44,8 @@ namespace esphome
       }
 
       bits[bit_count++] = value == 1 ? '1' : '0';
-      if (bit_count == 200) {
+      if (bit_count == 199) {
+        bits[199] = '\0';
         ESP_LOGD(TAG, "Bits: %s", bits);
         bit_count = 0;
       }
