@@ -18,7 +18,7 @@ namespace esphome
 
     volatile uint32_t header = 0xFFFFFFFF;
     volatile uint32_t frame = 0;
-    volatile uint64_t bits = 0;
+    volatile uint8_t bits[200];
     volatile uint8_t bit_count = 0;
     volatile bool waiting_for_header = true;
     volatile bool capturing_frame = false;
@@ -43,9 +43,10 @@ namespace esphome
         value = !value;
       }
 
-      bits = bits << 1 | value;
-      if (++bit_count == 64) {
-        printf("%d", bits);
+      bits[bit_count++] = value == 1 ? '1' : '0';
+      if (bit_count == 200) {
+        printf("%s", bits);
+        bit_count = 0;
       }
 
       if (waiting_for_header)
