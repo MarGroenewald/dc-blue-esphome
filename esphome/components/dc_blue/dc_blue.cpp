@@ -34,8 +34,8 @@ namespace esphome
       }
 
       // digitalWrite(DEBUG_PIN, !digitalRead(DEBUG_PIN));
-      ESP_LOGD(TAG, "Value: %d", value);
       bool value = instance->data_pin_->digital_read();
+      ESP_LOGD(TAG, "Value: %d", value);
       if (instance->inverted_)
       {
         value = !value;
