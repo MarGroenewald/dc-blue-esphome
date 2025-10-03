@@ -127,7 +127,7 @@ namespace esphome
     {
       if (process_queue_read != process_queue_write)
       {
-        ESP_LOGD(TAG, "Reading queue location %d", process_queue_read);
+        //ESP_LOGD(TAG, "Reading queue location %d", process_queue_read);
         process_frame(process_queue[process_queue_read]);
         process_queue_read++;
         process_queue_read = process_queue_read % (sizeof(instance->process_queue) / sizeof(instance->process_queue[0]));
@@ -186,7 +186,7 @@ namespace esphome
         ESP_LOGD(TAG, "Magnetic lock");
         break;
       default:
-        ESP_LOGW(TAG, "Unknown frame received: %08X", frame);
+        if (frame != 0x00551316 && frame != 0x00552624) ESP_LOGW(TAG, "Unknown frame received: %08X", frame);
       }
     }
 
