@@ -18,7 +18,7 @@ namespace esphome
 
     volatile uint32_t header = 0xFFFFFFFF;
     volatile uint32_t frame = 0;
-    volatile uint62_t bits = 0;
+    volatile uint64_t bits = 0;
     volatile uint8_t bit_count = 0;
     volatile bool waiting_for_header = true;
     volatile bool capturing_frame = false;
